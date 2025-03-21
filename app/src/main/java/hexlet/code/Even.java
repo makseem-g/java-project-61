@@ -17,7 +17,7 @@ public class Even {
         int rightAnswers = 0;
 
         for (var i = 1; i <= 3; i++) {
-            int randomNumber = random.nextInt(100);
+            int randomNumber = random.nextInt(100) + 1;
             System.out.println("Question: " + randomNumber);
             System.out.print("Your answer: ");
             String choice = forEvenGameScanner.nextLine();
@@ -26,12 +26,8 @@ public class Even {
                 if (choice.equalsIgnoreCase("yes")) {
                     System.out.println("Correct!");
                     rightAnswers += 1;
-                } else if (choice.equalsIgnoreCase("no")) {
-                    System.out.println("'no' is wrong answer ;(. Correct answer was 'yes'");
-                    System.out.println("Let's try again, " + name + "!");
-                    break;
                 } else {
-                    System.out.println("Your answer was wrong.");
+                    System.out.println("'" + choice + "' is wrong answer ;(. Correct answer was 'yes'");
                     System.out.println("Let's try again, " + name + "!");
                     break;
                 }
@@ -41,12 +37,8 @@ public class Even {
                 if (choice.equalsIgnoreCase("no")) {
                     System.out.println("Correct!");
                     rightAnswers += 1;
-                } else if (choice.equalsIgnoreCase("yes")) {
-                    System.out.println("'yes' is wrong answer ;(. Correct answer was 'no'");
-                    System.out.println("Let's try again, " + name + "!");
-                    break;
                 } else {
-                    System.out.println("Your answer was wrong.");
+                    System.out.println("'" + choice + "' is wrong answer ;(. Correct answer was 'no'");
                     System.out.println("Let's try again, " + name + "!");
                     break;
                 }
