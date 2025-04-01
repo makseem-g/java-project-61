@@ -1,24 +1,17 @@
 package hexlet.code;
-import java.util.Scanner;
-import java.util.Random;
 
 public class Calc {
     public static void gameCalc() {
-        Scanner forCalcGameScanner = new Scanner(System.in);
-
-        System.out.println("Welcome to the Brain Games!");
-        System.out.print("May I have your name?: ");
-        String name = forCalcGameScanner.nextLine();
-        System.out.println("Hello, " + name + "!");
+        Engine.getGreeting();
+        String name = Engine.getName();
         System.out.println("What is the result of the expression?");
 
-        Random random = new Random();
-        int rightAnswers = 0;
+        int rightAnswers = 0;//уехало, к удалению
 
-        for (var i = 1; i <= 3; i++) {
-            int num1 = random.nextInt(30) + 1;
-            int num2 = random.nextInt(30) + 1;
-            int randomOperator = random.nextInt(3) + 1;
+        for (var i = 1; i <= 3; i++) {//уехало, к удалению
+            int num1 = Engine.getRandomNumber();
+            int num2 = Engine.getRandomNumber();
+            int randomOperator = Engine.getRandomNumber(3);
             int result;
 
             switch (randomOperator) {
@@ -41,7 +34,7 @@ public class Calc {
             }
 
             System.out.print("Your answer: ");
-            String choice = forCalcGameScanner.nextLine();
+            String choice = Engine.getChoice();
 
             if (String.valueOf(result).equals(choice)) {
                 System.out.println("Correct!");

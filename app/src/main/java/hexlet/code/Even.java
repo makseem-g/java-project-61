@@ -1,26 +1,18 @@
 package hexlet.code;
-import java.util.Scanner;
-import java.util.Random;
-
 
 public class Even {
     public static void gameEven() {
-        Scanner forEvenGameScanner = new Scanner(System.in);
-
-        System.out.println("Welcome to the Brain Games!");
-        System.out.print("May I have your name?: ");
-        String name = forEvenGameScanner.nextLine();
-        System.out.println("Hello, " + name + "!");
+        Engine.getGreeting();
+        String name = Engine.getName();
         System.out.println("Answer 'yes' if the number is even, otherwise answer 'no'.");
 
-        Random random = new Random();
-        int rightAnswers = 0;
+        //int rightAnswers = 0;
 
-        for (var i = 1; i <= 3; i++) {
-            int randomNumber = random.nextInt(100) + 1;
-            System.out.println("Question: " + randomNumber);
-            System.out.print("Your answer: ");
-            String choice = forEvenGameScanner.nextLine();
+        for (var i = 1; i <= 3; i++) {//уехало, к удалению
+            int randomNumber = Engine.getRandomNumber();//уехало здесь в метод, к удалению
+            System.out.println("Question: " + randomNumber);//уехало, к удалению
+            System.out.print("Your answer: ");//уехало, к удалению
+            String choice = Engine.getChoice();//уехало, к удалению
 
             if (randomNumber % 2 == 0) {
                 if (choice.equalsIgnoreCase("yes")) {
@@ -48,5 +40,14 @@ public class Even {
         if (rightAnswers == 3) {
             System.out.println("Congratulations, " + name + "!");
         }
+    }
+
+    public static String taskOfTheGame() {
+        int randomNumber = Engine.getRandomNumber();
+        return String.valueOf(randomNumber);
+    }
+
+    public static boolean checkAnswer() {
+        if(здесь я закончил, нужно дописать уникальность проверки ответа для этой игры)
     }
 }
