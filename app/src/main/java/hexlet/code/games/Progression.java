@@ -8,15 +8,20 @@ public class Progression {
     }
 
     private static Integer result;
+
+    // Creating randomized length of array from 5 to 10
     private static int numbersCount = Engine.getRandomNumber(6) + 4;
     public static String getTask() {
         int[] numbers = new int[numbersCount];
-        int progressionCoefficient = Engine.getRandomNumber(13) + 2;
+        int progressionCoefficient = Engine.getRandomNumber(13) + 2; // In my opinion from 3 to 15 is good
         int hiddenNumberIndex = Engine.getRandomNumber(numbersCount) - 1;
         StringBuilder sb = new StringBuilder();
 
+        // Filling array by numbers
         for (int i = 0; i < numbers.length; i++) {
             numbers[i] = (i == 0) ? Engine.getRandomNumber() : numbers[i - 1] + progressionCoefficient;
+
+            // Set rules for String Builder
             if (i > 0) {
                 sb.append(" ");
             }
