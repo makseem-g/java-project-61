@@ -21,8 +21,9 @@ public class Prime {
             result = true;
         }
 
+        int initialOddDivisor = 3;
         // Checking odd divisors up to square root of number
-        for (int i = 3; i <= Math.sqrt(number); i += 2) {
+        for (int i = initialOddDivisor; i <= Math.sqrt(number); i += 2) {
             if (number % i == 0) {
                 result = false;
                 break;

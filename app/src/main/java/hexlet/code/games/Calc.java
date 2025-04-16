@@ -11,7 +11,8 @@ public class Calc {
     public static String getTask() {
         int num1 = Engine.getRandomNumber();
         int num2 = Engine.getRandomNumber();
-        int randomOperator = Engine.getRandomNumber(3);
+        int randomOperatorsCount = 3;
+        int randomOperator = Engine.getRandomNumber(randomOperatorsCount);
         String textOfTask = "";
 
         switch (randomOperator) {

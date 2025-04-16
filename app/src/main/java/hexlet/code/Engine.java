@@ -9,22 +9,21 @@ import java.util.Scanner;
 import java.util.Random;
 
 public class Engine {
-    // Creating input stream handler; the final modifier intentionally omitted
-    private static Scanner userInput = new Scanner(System.in);
+    // Creating input stream handler
+    private static final Scanner USER_INPUT = new Scanner(System.in);
     private static String name;
     private static String currentGame;
 
     // Creating a static Random instance for generating random numbers
-    // The final modifier intentionally omitted
-    private static Random random = new Random();
-    private static int countOfRounds = 3; // The final modifier intentionally omitted for flexibility
+    private static final Random RANDOM = new Random();
+    private static final int COUNT_OF_ROUNDS = 3;
     private static String task;
     private static String answer;
     private static Boolean isCorrectAnswer;
     private static String rightAnswer;
 
     public static String getChoice() {
-        return userInput.nextLine();
+        return USER_INPUT.nextLine();
     }
 
     public static void getGreeting() {
@@ -36,11 +35,11 @@ public class Engine {
 
     public static int getRandomNumber() {
         int defaultRange = 30; // Set default range of random numbers
-        return random.nextInt(defaultRange) + 1; // Offsets result by 1 to exclude zero from range
+        return RANDOM.nextInt(defaultRange) + 1; // Offsets result by 1 to exclude zero from range
     }
 
     public static int getRandomNumber(int range) { // When need specific range
-        return random.nextInt(range) + 1; // Offsets result by 1 to exclude zero from range
+        return RANDOM.nextInt(range) + 1; // Offsets result by 1 to exclude zero from range
     }
 
     public static void startChosenGame(String choice) {
@@ -149,7 +148,7 @@ public class Engine {
     public static void gameRoutine() {
         int rightAnswers = 0; // Initial counter for tracking correct responses
 
-        for (var i = 1; i <= countOfRounds; i++) {
+        for (var i = 1; i <= COUNT_OF_ROUNDS; i++) {
             setTask();
             System.out.println("Question: " + task);
             System.out.print("Your answer: ");
@@ -172,6 +171,6 @@ public class Engine {
 
     public static void setClose() {
         // Releases system resources by closing the input stream at application termination
-        userInput.close();
+        USER_INPUT.close();
     }
 }
