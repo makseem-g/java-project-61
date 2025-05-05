@@ -7,7 +7,7 @@ public class Utils {
     private static final Random RANDOM = new Random();
 
     public static int getRandomNumber() {
-        int defaultRange = 30; // Set default range of random numbers
+        final int defaultRange = 30; // Set default range of random numbers
         return RANDOM.nextInt(defaultRange) + 1; // Offsets result by 1 to exclude zero from range
     }
 

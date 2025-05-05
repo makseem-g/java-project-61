@@ -44,7 +44,7 @@ public class Engine {
             }
         }
 
-        if (rightAnswers == 3) {
+        if (rightAnswers == COUNT_OF_ROUNDS) {
             System.out.println("Congratulations, " + name + "!");
         }
     }

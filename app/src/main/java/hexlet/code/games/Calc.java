@@ -15,7 +15,7 @@ public class Calc {
             int num2 = Utils.getRandomNumber();
 
             // Creating random math operator
-            int randomOperatorsCount = 3; // Because need only '+', '-', '*'
+            final int randomOperatorsCount = 3; // Because need only '+', '-', '*'
             int randomOperator = Utils.getRandomNumber(randomOperatorsCount);
 
             switch (randomOperator) {
