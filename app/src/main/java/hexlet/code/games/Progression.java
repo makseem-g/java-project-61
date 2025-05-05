@@ -1,51 +1,52 @@
 package hexlet.code.games;
 
 import hexlet.code.Engine;
+import hexlet.code.Utils;
 
 public class Progression {
-    public static void getGameQuestion() {
-        System.out.println("What number is missing in the progression?");
-    }
+    public static void gamePreparation() {
+        String gameTask = "What number is missing in the progression?";
+        // Count of array elements (questions) equals count of rounds in game
+        String[] questions = new String[Engine.getCountOfRounds()];
+        String[] answers = new String[questions.length];
 
-    private static Integer result;
+        for (int i = 0; i < questions.length; i++) {
+            // Creating array with randomized numbers count from 5 to 10 numbers
+            final int minRangeNumber = 5;
+            final int maxRangeNumber = 10;
+            int numbersCount = Utils.getRandomNumber(minRangeNumber, maxRangeNumber);
+            int[] numbers = new int[numbersCount]; // Getting empty array for progression
 
-    // Creating randomized length of array from 5 to 10
-    private static final int RANDOM_NUMBER_MAX = 6;
-    private static final int OFFSET_VALUE = 4;
-    private static final int NUMBERS_COUNT = Engine.getRandomNumber(RANDOM_NUMBER_MAX) + OFFSET_VALUE;
-    public static String getTask() {
-        int[] numbers = new int[NUMBERS_COUNT];
-        int randomNumberRange = 13; // For get random number from 1 to 13
-        int offset = 2; // To increase the randomNumberRange value by 2, from 3 to 15
-        // In my opinion random coefficient of progression from 3 to 15 is enough for this game
-        int progressionCoefficient = Engine.getRandomNumber(randomNumberRange) + offset;
-        int hiddenNumberIndex = Engine.getRandomNumber(NUMBERS_COUNT) - 1;
-        StringBuilder sb = new StringBuilder();
+            // Creating progression coefficient
+            // In my opinion random coefficient of progression from 3 to 15 is enough for this game
+            final int minProgressionRange = 3;
+            final int maxProgressionRange = 15;
+            int progressionCoefficient = Utils.getRandomNumber(minProgressionRange, maxProgressionRange);
 
-        // Filling array by numbers
-        for (int i = 0; i < numbers.length; i++) {
-            numbers[i] = (i == 0) ? Engine.getRandomNumber() : numbers[i - 1] + progressionCoefficient;
+            // Creating random index of progression numbers array to be hidden
+            int hiddenNumberIndex = Utils.getRandomNumber(numbers.length) - 1; // '- 1' because it is index of array
 
-            // Set rules for String Builder
-            if (i > 0) {
-                sb.append(" ");
+            StringBuilder sb = new StringBuilder();
+
+            // Filling array of progression by numbers
+            for (int j = 0; j < numbers.length; j++) {
+                numbers[j] = (j == 0) ? Utils.getRandomNumber() : numbers[j - 1] + progressionCoefficient;
+
+                // Set rules for String Builder
+                if (j > 0) {
+                    sb.append(" ");
+                }
+                if (j == hiddenNumberIndex) {
+                    sb.append("..");
+                } else {
+                    sb.append(numbers[j]);
+                }
             }
-            if (i == hiddenNumberIndex) {
-                sb.append("..");
-            } else {
-                sb.append(numbers[i]);
-            }
+
+            questions[i] = sb.toString();
+            answers[i] = String.valueOf(numbers[hiddenNumberIndex]);
         }
-        result = numbers[hiddenNumberIndex];
-        return sb.toString();
-    }
 
-    public static boolean checkAnswer() {
-        String answer = Engine.getAnswer();
-        return (String.valueOf(result).equals(answer));
-    }
-
-    public static String getRightAnswer() {
-        return String.valueOf(result);
+        Engine.gameRoutine(gameTask, questions, answers);
     }
 }

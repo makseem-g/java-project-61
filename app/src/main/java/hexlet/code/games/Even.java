@@ -1,25 +1,21 @@
 package hexlet.code.games;
 
 import hexlet.code.Engine;
+import hexlet.code.Utils;
 
 public class Even {
-    public static void getGameQuestion() {
-        System.out.println("Answer 'yes' if the number is even, otherwise answer 'no'.");
-    }
+    public static void gamePreparation() {
+        String gameTask = "Answer 'yes' if the number is even, otherwise answer 'no'.";
+        // Count of array elements (questions) equals count of rounds in game
+        String[] questions = new String[Engine.getCountOfRounds()];
+        String[] answers = new String[questions.length];
 
-    public static int getTask() {
-        return Engine.getRandomNumber();
-    }
+        for (int i = 0; i < questions.length; i++) {
+            int questionElement = Utils.getRandomNumber();
+            questions[i] = String.valueOf(questionElement);
+            answers[i] = questionElement % 2 == 0 ? "yes" : "no";
+        }
 
-    public static boolean checkAnswer() {
-        int task = Integer.parseInt(Engine.getTask());
-        String answer = Engine.getAnswer();
-        return (answer.equalsIgnoreCase("yes") && task % 2 == 0)
-                || (answer.equalsIgnoreCase("no") && task % 2 != 0);
-    }
-
-    public static String getRightAnswer() {
-        int task = Integer.parseInt(Engine.getTask());
-        return task % 2 == 0 ? "yes" : "no";
+        Engine.gameRoutine(gameTask, questions, answers);
     }
 }

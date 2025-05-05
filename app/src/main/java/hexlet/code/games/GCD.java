@@ -1,35 +1,32 @@
 package hexlet.code.games;
 
 import hexlet.code.Engine;
+import hexlet.code.Utils;
 
 public class GCD {
-    public static void getGameQuestion() {
-        System.out.println("Find the greatest common divisor of given numbers.");
-    }
+    public static void gamePreparation() {
+        String gameTask = "Find the greatest common divisor of given numbers.";
+        // Count of array elements (questions) equals count of rounds in game
+        String[] questions = new String[Engine.getCountOfRounds()];
+        String[] answers = new String[questions.length];
 
-    private static Integer result;
-    public static String getTask() {
-        int num1 = Engine.getRandomNumber();
-        int num2 = Engine.getRandomNumber();
-        String textOfTask = num1 + " " + num2;
-        int a = num1;
-        int b = num2;
+        for (int i = 0; i < questions.length; i++) {
+            int num1 = Utils.getRandomNumber();
+            int num2 = Utils.getRandomNumber();
 
-        while (b != 0) {
-            int temp = b;
-            b = a % b;
-            a = temp;
+            questions[i] = num1 + " " + num2;
+
+            int a = num1;
+            int b = num2;
+
+            while (b != 0) {
+                int temp = b;
+                b = a % b;
+                a = temp;
+            }
+            answers[i] = String.valueOf(a);
         }
-        result = a;
-        return textOfTask;
-    }
 
-    public static boolean checkAnswer() {
-        String answer = Engine.getAnswer();
-        return (String.valueOf(result).equals(answer));
-    }
-
-    public static String getRightAnswer() {
-        return String.valueOf(result);
+        Engine.gameRoutine(gameTask, questions, answers);
     }
 }

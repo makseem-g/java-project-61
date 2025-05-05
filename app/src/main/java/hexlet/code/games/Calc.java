@@ -1,47 +1,42 @@
 package hexlet.code.games;
 
 import hexlet.code.Engine;
+import hexlet.code.Utils;
 
 public class Calc {
-    public static void getGameQuestion() {
-        System.out.println("What is the result of the expression?");
-    }
+    public static void gamePreparation() {
+        String gameTask = "What is the result of the expression?";
+        // Count of array elements (questions) equals count of rounds in game
+        String[] questions = new String[Engine.getCountOfRounds()];
+        String[] answers = new String[questions.length];
 
-    private static Integer result;
-    public static String getTask() {
-        int num1 = Engine.getRandomNumber();
-        int num2 = Engine.getRandomNumber();
-        int randomOperatorsCount = 3;
-        int randomOperator = Engine.getRandomNumber(randomOperatorsCount);
-        String textOfTask = "";
+        for (int i = 0; i < questions.length; i++) {
+            int num1 = Utils.getRandomNumber();
+            int num2 = Utils.getRandomNumber();
 
-        switch (randomOperator) {
-            case 1:
-                result = num1 + num2;
-                textOfTask = num1 + " + " + num2;
-                break;
-            case 2:
-                result = num1 - num2;
-                textOfTask = num1 + " - " + num2;
-                break;
-            case 3:
-                result = num1 * num2;
-                textOfTask = num1 + " * " + num2;
-                break;
-            default:
-                result = 0;
-                System.out.println("Unknown operator!");
-                break;
+            // Creating random math operator
+            int randomOperatorsCount = 3; // Because need only '+', '-', '*'
+            int randomOperator = Utils.getRandomNumber(randomOperatorsCount);
+
+            switch (randomOperator) {
+                case 1:
+                    questions[i] = num1 + " + " + num2;
+                    answers[i] = String.valueOf(num1 + num2);
+                    break;
+                case 2:
+                    questions[i] = num1 + " - " + num2;
+                    answers[i] = String.valueOf(num1 - num2);
+                    break;
+                case 3:
+                    questions[i] = num1 + " * " + num2;
+                    answers[i] = String.valueOf(num1 * num2);
+                    break;
+                default:
+                    System.out.println("Unknown operator!");
+                    break;
+            }
         }
-        return textOfTask;
-    }
 
-    public static boolean checkAnswer() {
-        String answer = Engine.getAnswer();
-        return (String.valueOf(result).equals(answer));
-    }
-
-    public static String getRightAnswer() {
-        return String.valueOf(result);
+        Engine.gameRoutine(gameTask, questions, answers);
     }
 }
