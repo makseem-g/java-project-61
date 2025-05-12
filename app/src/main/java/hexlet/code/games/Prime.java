@@ -4,39 +4,51 @@ import hexlet.code.Engine;
 import hexlet.code.Utils;
 
 public class Prime {
-    public static void gamePreparation() {
-        String gameTask = "Answer 'yes' if given number is prime. Otherwise answer 'no'.";
-        // Count of array elements (questions) equals count of rounds in game
-        String[] questions = new String[Engine.getCountOfRounds()];
-        String[] answers = new String[questions.length];
+    public static final String GAME_TASK = "Answer 'yes' if given number is prime. Otherwise answer 'no'.";
 
-        for (int i = 0; i < questions.length; i++) {
-            int number = Utils.getRandomNumber();
-            String result;
+    public static void prepareGame() {
+        String[][] questionsAnswers = generateQuestionsAndAnswers();
+        Engine.runGame(GAME_TASK, questionsAnswers);
+    }
 
-            if (number == 1) {
-                // 1 is not Prime
-                result = "no";
-            } else if (number > 2 && number % 2 == 0) {
-                // All even numbers, if it is not 2 - is not Prime
-                result = "no";
-            } else {
-                result = "yes";
-            }
+    private static String[][] generateQuestionsAndAnswers() {
+        // Creating double-dimensional array
+        // Count of array pair-elements (question and answer) equals count of rounds in game
+        final int elementsCountInPair = 2;
+        String[][] questionsAnswers = new String[Engine.getCountOfRounds()][elementsCountInPair];
 
-            // Checking odd divisors up to square root of number
-            final int initialOddDivisor = 3;
-            for (int j = initialOddDivisor; j <= Math.sqrt(number); j += 2) {
-                if (number % j == 0) {
-                    result = "no";
-                    break;
-                }
-            }
-
-            questions[i] = String.valueOf(number);
-            answers[i] = result;
+        for (int i = 0; i < questionsAnswers.length; i++) {
+            int questionElement = generateQuestionElement();
+            boolean isPrime = isPrimeNumber(questionElement);
+            questionsAnswers[i][0] = String.valueOf(questionElement); // question
+            questionsAnswers[i][1] = isPrime ? "yes" : "no"; // answer
         }
 
-        Engine.gameRoutine(gameTask, questions, answers);
+        return questionsAnswers;
+    }
+
+    private static int generateQuestionElement() {
+        return Utils.getRandomNumber();
+    }
+
+    private static boolean isPrimeNumber(int number) {
+        if (number == 1) {
+            // 1 is not Prime
+            return false;
+        }
+        if (number > 2 && number % 2 == 0) {
+            // All even numbers, if it is not 2 - is not Prime
+            return false;
+        }
+
+        // Checking odd divisors up to square root of number
+        final int initialOddDivisor = 3;
+        for (int i = initialOddDivisor; i <= Math.sqrt(number); i += 2) {
+            if (number % i == 0) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class Engine {
     // Creating input stream handler
     private static final Scanner USER_INPUT = new Scanner(System.in);
-    private static String name;
     private static final int COUNT_OF_ROUNDS = 3;
 
     public static int getCountOfRounds() {
@@ -16,37 +15,35 @@ public class Engine {
         return USER_INPUT.nextLine();
     }
 
-    public static void getGreeting() {
+    public static String getGreeting() {
         System.out.println("Welcome to the Brain Games!");
         System.out.print("May I have your name?: ");
-        name = getChoice();
+        String name = getChoice();
         System.out.println("Hello, " + name + "!");
+        return name; // Not required for the "Greet" game but needed for other games
     }
 
-    public static void gameRoutine(String gameTask, String[] questions, String[] answers) {
-        getGreeting();
+    public static void runGame(String gameTask, String[][] questionsAnswers) {
+        String name = getGreeting(); // Launch greeting and get player name in one action
         System.out.println(gameTask);
-
-        int rightAnswers = 0; // Initial counter for tracking correct responses
 
         for (var i = 0; i < COUNT_OF_ROUNDS; i++) {
             String answer;
-            System.out.println("Question: " + questions[i]);
+            System.out.println("Question: " + questionsAnswers[i][0]);
             System.out.print("Your answer: ");
             answer = getChoice();
-            if (answer.equalsIgnoreCase(answers[i])) {
-                System.out.println("Correct!");
-                rightAnswers += 1;
-            } else {
-                System.out.println("'" + answer + "' is wrong answer ;(. Correct answer was '" + answers[i] + "'");
+
+            if (!answer.equalsIgnoreCase(questionsAnswers[i][1])) {
+                System.out.println("'" + answer + "' is wrong answer ;(. "
+                        + "Correct answer was '" + questionsAnswers[i][1] + "'");
                 System.out.println("Let's try again, " + name + "!");
-                break;
+                return;
             }
+
+            System.out.println("Correct!");
         }
 
-        if (rightAnswers == COUNT_OF_ROUNDS) {
-            System.out.println("Congratulations, " + name + "!");
-        }
+        System.out.println("Congratulations, " + name + "!");
     }
 
     public static void setClose() {

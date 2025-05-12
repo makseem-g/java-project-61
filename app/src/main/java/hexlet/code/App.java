@@ -25,19 +25,19 @@ public class App {
                 Engine.getGreeting();
                 break;
             case "2":
-                Even.gamePreparation();
+                Even.prepareGame();
                 break;
             case "3":
-                Calc.gamePreparation();
+                Calc.prepareGame();
                 break;
             case "4":
-                GCD.gamePreparation();
+                GCD.prepareGame();
                 break;
             case "5":
-                Progression.gamePreparation();
+                Progression.prepareGame();
                 break;
             case "6":
-                Prime.gamePreparation();
+                Prime.prepareGame();
                 break;
             case "0":
                 System.out.println("Bye.");
