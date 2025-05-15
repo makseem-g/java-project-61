@@ -22,7 +22,7 @@ public class App {
 
         switch (choice) {
             case "1":
-                Engine.getGreeting();
+                Cli.getGreeting();
                 break;
             case "2":
                 Even.prepareGame();

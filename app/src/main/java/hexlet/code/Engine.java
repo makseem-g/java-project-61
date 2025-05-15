@@ -15,16 +15,11 @@ public class Engine {
         return USER_INPUT.nextLine();
     }
 
-    public static String getGreeting() {
+    public static void runGame(String gameTask, String[][] questionsAnswers) {
         System.out.println("Welcome to the Brain Games!");
         System.out.print("May I have your name?: ");
         String name = getChoice();
         System.out.println("Hello, " + name + "!");
-        return name; // Not required for the "Greet" game but needed for other games
-    }
-
-    public static void runGame(String gameTask, String[][] questionsAnswers) {
-        String name = getGreeting(); // Launch greeting and get player name in one action
         System.out.println(gameTask);
 
         for (var i = 0; i < COUNT_OF_ROUNDS; i++) {
